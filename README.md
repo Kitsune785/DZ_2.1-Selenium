@@ -1,1 +1,1 @@
-# DZ_2.1-Selenium
+[![Build status](https://ci.appveyor.com/api/projects/status/g70ar1xqei660s85?svg=true)](https://ci.appveyor.com/project/Kitsune785/dz-2-1-selenium)
