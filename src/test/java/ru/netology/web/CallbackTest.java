@@ -42,9 +42,21 @@ public class CallbackTest {
     }
 
     @Test
-    void shouldTestV1() {
+    void shouldHoldValidData() {
         driver.get("http://localhost:9999/");
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Иванов Иван");
+        driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79993332222");
+        driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
+        driver.findElement(By.className("button")).click();
+        String expected = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
+        String actual = driver.findElement(By.className("Success_successBlock__2L3Cw")).getText().trim();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldInsertNonStandardLetters() {
+        driver.get("http://localhost:9999/");
+        driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Семёнов Инокентий");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79993332222");
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
         driver.findElement(By.className("button")).click();
