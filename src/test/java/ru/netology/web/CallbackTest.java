@@ -97,10 +97,23 @@ public class CallbackTest {
     }
 
     @Test
-    void shouldShowAllFieldsEmpty() {
+    void shouldShowEmptyName() {
+        driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79999999999");
+        driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
         driver.findElement(By.className("button")).click();
         String expected = "Поле обязательно для заполнения";
         String actual = driver.findElement(By.cssSelector("[data-test-id='name'].input_invalid .input__sub"))
+                .getText().trim();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldShowEmptyPhone() {
+        driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Иванов Иван");
+        driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
+        driver.findElement(By.className("button")).click();
+        String expected = "Поле обязательно для заполнения";
+        String actual = driver.findElement(By.cssSelector("[data-test-id='phone'].input_invalid .input__sub"))
                 .getText().trim();
         assertEquals(expected, actual);
     }
